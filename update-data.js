@@ -321,9 +321,6 @@ async function updateDashboardData() {
     console.log(`현재 글 수: ${validPosts.length}개`);
     console.log(`전체 완주율: ${overallCompletionRate}%`);
     
-    // 최대 연속 기록
-    const maxStreak = Math.max(...participantStats.map(p => p.streak), 0);
-    
     // 최근 글 3개
     const recentPosts = postsWithWordCount.slice(0, 3);
     
