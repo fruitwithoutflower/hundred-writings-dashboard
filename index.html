@@ -193,7 +193,7 @@
         
         <div class="date-info">
             <h3>📅 프로젝트 정보</h3>
-            <p>2024.09.23 ~ 2024.12.31 (100일)</p>
+            <p>2025.09.23 ~ 2025.12.31 (100일)</p>
             <p>매일 오후 11:45까지 글 작성</p>
         </div>
         
@@ -204,7 +204,7 @@
     
     <script>
         function updateProgress() {
-            const startDate = new Date('2024-09-23');
+            const startDate = new Date('2025-09-23');
             const today = new Date();
             const daysPassed = Math.floor((today - startDate) / (1000 * 60 * 60 * 24)) + 1;
             const currentDay = Math.min(Math.max(daysPassed, 1), 100);
@@ -244,6 +244,94 @@
             // 30초마다 업데이트
             setInterval(() => {
                 updateProgress();
+                updateLastUpdateTime();
+            }, 30000);
+        });
+        
+        // 클릭 시 노션 아카이브로 이동
+        document.querySelector('.widget').addEventListener('click', function() {
+            window.open('https://www.notion.so/3959b66212ed40f6af2052c4be14fda0', '_blank');
+        });
+<script src="data.js"></script>
+    <script>
+        // 실시간 데이터로 업데이트
+        function updateWithNotionData() {
+            if (typeof window.dashboardData !== 'undefined') {
+                const data = window.dashboardData;
+                
+                // 기본 통계 업데이트
+                document.getElementById('current-day').textContent = data.currentDay;
+                document.getElementById('total-writings').textContent = data.totalPosts;
+                document.getElementById('completion-rate').textContent = data.overallCompletionRate + '%';
+                document.getElementById('streak-days').textContent = data.maxStreak;
+                document.getElementById('total-words').textContent = data.totalWords.toLocaleString();
+                
+                // 진행률 업데이트
+                const circle = document.getElementById('progress-circle');
+                const circumference = 2 * Math.PI * 50;
+                const progress = data.currentDay / 100;
+                const offset = circumference - (progress * circumference);
+                circle.style.strokeDashoffset = offset;
+                
+                console.log('✅ 노션 데이터로 업데이트 완료!', data);
+            } else {
+                console.log('⏳ 노션 데이터 로딩 중... 기본값 사용');
+                updateProgress(); // 기본 계산 사용
+            }
+        }
+        
+        function updateProgress() {
+            const startDate = new Date('2025-09-23');
+            const today = new Date();
+            const daysPassed = Math.floor((today - startDate) / (1000 * 60 * 60 * 24)) + 1;
+            const currentDay = Math.min(Math.max(daysPassed, 1), 100);
+            
+            // 진행률 업데이트
+            document.getElementById('current-day').textContent = currentDay;
+            
+            // 원형 프로그레스 바 업데이트
+            const circle = document.getElementById('progress-circle');
+            const circumference = 2 * Math.PI * 50;
+            const progress = currentDay / 100;
+            const offset = circumference - (progress * circumference);
+            circle.style.strokeDashoffset = offset;
+        }
+        
+        function updateLastUpdateTime() {
+            const now = new Date();
+            let timeString;
+            
+            if (typeof window.dashboardData !== 'undefined' && window.dashboardData.lastUpdated) {
+                const updateTime = new Date(window.dashboardData.lastUpdated);
+                timeString = updateTime.toLocaleString('ko-KR', {
+                    month: 'short',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                }) + ' (노션 동기화)';
+            } else {
+                timeString = now.toLocaleString('ko-KR', {
+                    month: 'short',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                }) + ' (로컬)';
+            }
+            
+            document.getElementById('last-update').textContent = timeString;
+        }
+        
+        // 페이지 로드 시 실행
+        document.addEventListener('DOMContentLoaded', function() {
+            // 노션 데이터가 있으면 사용, 없으면 기본 계산
+            setTimeout(() => {
+                updateWithNotionData();
+                updateLastUpdateTime();
+            }, 100);
+            
+            // 30초마다 업데이트
+            setInterval(() => {
+                updateWithNotionData();
                 updateLastUpdateTime();
             }, 30000);
         });
