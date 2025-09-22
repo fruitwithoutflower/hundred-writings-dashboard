@@ -8,14 +8,16 @@ on:
 jobs:
   update:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write  # 파일 수정 권한 추가
     steps:
     - name: Checkout
-      uses: actions/checkout@v4  # v3 → v4로 업데이트
+      uses: actions/checkout@v4
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         
     - name: Setup Node.js
-      uses: actions/setup-node@v4  # v3 → v4로 업데이트
+      uses: actions/setup-node@v4
       with:
         node-version: '18'
         
