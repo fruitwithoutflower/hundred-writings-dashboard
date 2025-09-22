@@ -1,30 +1,85 @@
 const { Client } = require('@notionhq/client');
 const fs = require('fs');
 
-const notion = new Client({
-  auth: process.env.NOTION_TOKEN,
-});
+// 환경변수 검증
+console.log('🔍 환경변수 확인 중...');
+console.log('NOTION_TOKEN 존재:', !!process.env.NOTION_TOKEN);
+console.log('DATABASE_ID 존재:', !!process.env.DATABASE_ID);
 
-const databaseId = process.env.DATABASE_ID;
-
-// 에러 처리 개선
 if (!process.env.NOTION_TOKEN) {
   console.error('❌ NOTION_TOKEN 환경변수가 설정되지 않았습니다.');
+  console.error('GitHub Secrets에서 NOTION_TOKEN을 확인해주세요.');
   process.exit(1);
 }
 
 if (!process.env.DATABASE_ID) {
   console.error('❌ DATABASE_ID 환경변수가 설정되지 않았습니다.');
+  console.error('GitHub Secrets에서 DATABASE_ID를 확인해주세요.');
   process.exit(1);
 }
 
-// 페이지 텍스트 내용 추출 함수 (개선된 버전)
+// 노션 클라이언트 초기화
+let notion;
+try {
+  console.log('🔧 노션 클라이언트 초기화 중...');
+  notion = new Client({
+    auth: process.env.NOTION_TOKEN,
+  });
+  console.log('✅ 노션 클라이언트 초기화 성공');
+} catch (error) {
+  console.error('❌ 노션 클라이언트 초기화 실패:', error.message);
+  process.exit(1);
+}
+
+const databaseId = process.env.DATABASE_ID;
+
+// 노션 연결 테스트 함수
+async function testNotionConnection() {
+  try {
+    console.log('🧪 노션 연결 테스트 중...');
+    console.log('Database ID:', databaseId);
+    
+    // 데이터베이스 정보 먼저 확인
+    const database = await notion.databases.retrieve({
+      database_id: databaseId
+    });
+    
+    console.log('✅ 데이터베이스 접근 성공!');
+    console.log('데이터베이스 이름:', database.title?.[0]?.plain_text || '이름 없음');
+    
+    // 속성 확인
+    console.log('\n📋 데이터베이스 속성:');
+    Object.entries(database.properties).forEach(([name, prop]) => {
+      console.log(`  ${name}: ${prop.type}`);
+    });
+    
+    return true;
+  } catch (error) {
+    console.error('❌ 노션 연결 테스트 실패:', error.message);
+    console.error('상세 오류:', error);
+    
+    if (error.code === 'object_not_found') {
+      console.error('\n💡 해결 방법:');
+      console.error('1. DATABASE_ID가 올바른지 확인하세요');
+      console.error('2. 노션에서 인테그레이션을 해당 페이지에 연결하세요');
+      console.error('   - 노션 페이지 → 공유 → 연결 추가 → 인테그레이션 선택');
+    } else if (error.code === 'unauthorized') {
+      console.error('\n💡 해결 방법:');
+      console.error('1. NOTION_TOKEN이 올바른지 확인하세요');
+      console.error('2. 토큰이 만료되지 않았는지 확인하세요');
+    }
+    
+    return false;
+  }
+}
+
+// 페이지 텍스트 내용 추출 함수
 async function extractPageContent(pageId, retries = 3) {
   for (let attempt = 1; attempt <= retries; attempt++) {
     try {
       const blocks = await notion.blocks.children.list({ 
         block_id: pageId,
-        page_size: 100 // 한 번에 더 많은 블록 가져오기
+        page_size: 100
       });
       
       let textContent = '';
@@ -38,20 +93,19 @@ async function extractPageContent(pageId, retries = 3) {
       
       return textContent.trim();
     } catch (error) {
-      console.warn(`Attempt ${attempt}/${retries} failed for page ${pageId}:`, error.message);
+      console.warn(`⚠️  페이지 ${pageId} 시도 ${attempt}/${retries} 실패:`, error.message);
       
       if (attempt === retries) {
-        console.error(`❌ Could not extract content for page ${pageId} after ${retries} attempts`);
+        console.error(`❌ 페이지 ${pageId} 최종 실패`);
         return '';
       }
       
-      // 재시도 전 대기 (지수 백오프)
       await new Promise(resolve => setTimeout(resolve, Math.pow(2, attempt) * 1000));
     }
   }
 }
 
-// 블록에서 텍스트 추출하는 헬퍼 함수
+// 블록에서 텍스트 추출
 function extractTextFromBlock(block) {
   const blockTypes = [
     'paragraph', 'heading_1', 'heading_2', 'heading_3',
@@ -68,7 +122,7 @@ function extractTextFromBlock(block) {
   return '';
 }
 
-// 연속 기록 계산 함수 (개선된 버전)
+// 연속 기록 계산
 function calculateStreak(posts, author) {
   const authorPosts = posts.filter(post => 
     post.properties.작성자?.select?.name === author
@@ -76,7 +130,6 @@ function calculateStreak(posts, author) {
   
   if (authorPosts.length === 0) return 0;
   
-  // 날짜별로 정렬 (최신순)
   const sortedDates = authorPosts
     .map(post => post.properties.날짜?.date?.start)
     .filter(date => date)
@@ -89,7 +142,6 @@ function calculateStreak(posts, author) {
   const today = new Date();
   const startDate = new Date('2025-09-23');
   
-  // 오늘부터 거꾸로 확인
   for (let i = 0; i <= 100; i++) {
     const checkDate = new Date(today);
     checkDate.setDate(today.getDate() - i);
@@ -100,7 +152,7 @@ function calculateStreak(posts, author) {
     
     if (sortedDates.includes(dateString)) {
       streak++;
-    } else if (i > 0) { // 첫 날이 아닌 경우에만 중단
+    } else if (i > 0) {
       break;
     }
   }
@@ -108,7 +160,7 @@ function calculateStreak(posts, author) {
   return streak;
 }
 
-// Day 계산 함수
+// Day 계산
 function calculateDay(dateString) {
   if (!dateString) return 0;
   const postDate = new Date(dateString);
@@ -119,9 +171,16 @@ function calculateDay(dateString) {
 // 메인 함수
 async function updateDashboardData() {
   try {
-    console.log('🔄 Fetching data from Notion...');
+    // 1. 노션 연결 테스트
+    const connectionSuccess = await testNotionConnection();
+    if (!connectionSuccess) {
+      console.error('❌ 노션 연결 실패로 인해 종료합니다.');
+      process.exit(1);
+    }
     
-    // 노션 데이터베이스에서 모든 글 가져오기
+    // 2. 데이터 가져오기
+    console.log('\n🔄 노션에서 데이터 가져오는 중...');
+    
     const response = await notion.databases.query({
       database_id: databaseId,
       sorts: [
@@ -130,41 +189,66 @@ async function updateDashboardData() {
           direction: 'descending',
         },
       ],
-      page_size: 100, // 최대 페이지 크기
+      page_size: 100,
     });
 
-    console.log(`📝 Found ${response.results.length} posts`);
+    console.log(`📝 총 ${response.results.length}개 항목 발견`);
     
-    // 기본 데이터 분석
+    // 3. 데이터 검증
     const allPosts = response.results;
     const validPosts = allPosts.filter(post => 
       post.properties.날짜?.date?.start && 
       post.properties.작성자?.select?.name
     );
     
-    console.log(`✅ Valid posts: ${validPosts.length}`);
+    console.log(`✅ 유효한 글: ${validPosts.length}개`);
     
-    // 참가자 목록
+    if (validPosts.length === 0) {
+      console.warn('⚠️  유효한 글이 없습니다. 기본 데이터를 생성합니다.');
+      // 기본 데이터 생성
+      const defaultData = {
+        totalPosts: 0,
+        currentDay: Math.max(1, Math.floor((new Date() - new Date('2025-09-23')) / (1000 * 60 * 60 * 24)) + 1),
+        participantCount: 0,
+        totalWords: 0,
+        overallCompletionRate: 0,
+        maxStreak: 0,
+        genreDistribution: {},
+        participantStats: [],
+        recentPosts: [],
+        lastUpdated: new Date().toISOString(),
+        projectInfo: {
+          startDate: '2025-09-23',
+          endDate: '2025-12-31',
+          totalDays: 100,
+        }
+      };
+      
+      const jsContent = `window.dashboardData = ${JSON.stringify(defaultData, null, 2)};`;
+      fs.writeFileSync('data.js', jsContent);
+      console.log('✅ 기본 데이터 파일 생성 완료');
+      return;
+    }
+    
+    // 4. 실제 데이터 처리 (기존 로직)
     const participants = [...new Set(validPosts.map(post => 
       post.properties.작성자?.select?.name
     ))].filter(Boolean);
     
-    console.log(`👥 Participants: ${participants.join(', ')}`);
+    console.log(`👥 참가자: ${participants.join(', ')}`);
     
-    // 현재 일차 계산
     const today = new Date();
     const startDate = new Date('2025-09-23');
-    const currentDay = Math.floor((today - startDate) / (1000 * 60 * 60 * 24)) + 1;
-    const daysClamped = Math.min(Math.max(currentDay, 1), 100);
+    const currentDay = Math.min(Math.max(Math.floor((today - startDate) / (1000 * 60 * 60 * 24)) + 1, 1), 100);
     
-    // 총 글자수 계산 (페이지 내용에서)
-    console.log('📊 Calculating word counts...');
+    console.log('📊 글자수 계산 중...');
     let totalWords = 0;
     const postsWithWordCount = [];
     
-    for (let i = 0; i < validPosts.length; i++) {
+    for (let i = 0; i < Math.min(validPosts.length, 20); i++) { // 처음 20개만 처리
       const post = validPosts[i];
-      console.log(`Processing ${i + 1}/${validPosts.length}: ${post.properties.제목?.title?.[0]?.text?.content || 'Untitled'}`);
+      const title = post.properties.제목?.title?.[0]?.text?.content || '제목없음';
+      console.log(`처리 중 ${i + 1}/${Math.min(validPosts.length, 20)}: ${title}`);
       
       try {
         const content = await extractPageContent(post.id);
@@ -173,7 +257,7 @@ async function updateDashboardData() {
         
         postsWithWordCount.push({
           id: post.id,
-          title: post.properties.제목?.title?.[0]?.text?.content || '제목 없음',
+          title: title,
           author: post.properties.작성자?.select?.name || '익명',
           date: post.properties.날짜?.date?.start || '',
           genre: post.properties.장르?.select?.name || '기타',
@@ -183,32 +267,46 @@ async function updateDashboardData() {
           day: calculateDay(post.properties.날짜?.date?.start),
         });
         
-        // API 호출 제한을 위한 지연
-        await new Promise(resolve => setTimeout(resolve, 200));
+        await new Promise(resolve => setTimeout(resolve, 500)); // 더 긴 지연
       } catch (error) {
-        console.warn(`⚠️  Error processing post ${post.id}:`, error.message);
+        console.warn(`⚠️  ${title} 처리 실패:`, error.message);
         postsWithWordCount.push({
           id: post.id,
-          title: post.properties.제목?.title?.[0]?.text?.content || '제목 없음',
+          title: title,
           author: post.properties.작성자?.select?.name || '익명',
           date: post.properties.날짜?.date?.start || '',
           genre: post.properties.장르?.select?.name || '기타',
-          tags: post.properties.태그?.multi_select?.map(tag => tag.name) || [],
-          memo: post.properties.메모?.rich_text?.[0]?.text?.content || '',
+          tags: [],
+          memo: '',
           wordCount: 0,
           day: calculateDay(post.properties.날짜?.date?.start),
         });
       }
     }
     
-    // 장르별 분포
+    // 나머지 글들은 글자수 0으로 추가
+    for (let i = 20; i < validPosts.length; i++) {
+      const post = validPosts[i];
+      postsWithWordCount.push({
+        id: post.id,
+        title: post.properties.제목?.title?.[0]?.text?.content || '제목없음',
+        author: post.properties.작성자?.select?.name || '익명',
+        date: post.properties.날짜?.date?.start || '',
+        genre: post.properties.장르?.select?.name || '기타',
+        tags: post.properties.태그?.multi_select?.map(tag => tag.name) || [],
+        memo: post.properties.메모?.rich_text?.[0]?.text?.content || '',
+        wordCount: 0,
+        day: calculateDay(post.properties.날짜?.date?.start),
+      });
+    }
+    
+    // 통계 계산
     const genreDistribution = {};
     postsWithWordCount.forEach(post => {
       const genre = post.genre || '기타';
       genreDistribution[genre] = (genreDistribution[genre] || 0) + 1;
     });
     
-    // 참가자별 통계
     const participantStats = participants.map(author => {
       const authorPosts = postsWithWordCount.filter(post => post.author === author);
       const authorWords = authorPosts.reduce((sum, post) => sum + post.wordCount, 0);
@@ -219,37 +317,24 @@ async function updateDashboardData() {
         postCount: authorPosts.length,
         wordCount: authorWords,
         streak: streak,
-        completionRate: Math.round((authorPosts.length / daysClamped) * 100),
+        completionRate: Math.round((authorPosts.length / currentDay) * 100),
       };
     });
     
-    // 최근 글 3개
     const recentPosts = postsWithWordCount.slice(0, 3);
-    
-    // 전체 완주율
-    const overallCompletionRate = Math.round((validPosts.length / (daysClamped * participants.length)) * 100);
-    
-    // 최대 연속 기록
+    const overallCompletionRate = Math.round((validPosts.length / (currentDay * participants.length)) * 100);
     const maxStreak = Math.max(...participantStats.map(p => p.streak), 0);
     
-    // 최종 데이터 객체
     const dashboardData = {
-      // 기본 통계
       totalPosts: validPosts.length,
-      currentDay: daysClamped,
+      currentDay: currentDay,
       participantCount: participants.length,
       totalWords: totalWords,
       overallCompletionRate: overallCompletionRate,
       maxStreak: maxStreak,
-      
-      // 분포 데이터
       genreDistribution: genreDistribution,
       participantStats: participantStats,
-      
-      // 최근 글
       recentPosts: recentPosts,
-      
-      // 메타 데이터
       lastUpdated: new Date().toISOString(),
       projectInfo: {
         startDate: '2025-09-23',
@@ -258,41 +343,57 @@ async function updateDashboardData() {
       }
     };
 
-    // data.js 파일 생성
-    const jsContent = `// 자동 생성된 데이터 파일 - 수정하지 마세요
+    const jsContent = `// 자동 생성된 데이터 파일
 // 마지막 업데이트: ${new Date().toLocaleString('ko-KR')}
 window.dashboardData = ${JSON.stringify(dashboardData, null, 2)};
 
-// 데이터 로드 확인
 if (typeof window !== 'undefined') {
-  console.log('✅ Dashboard data loaded successfully!');
-  console.log('📊 Stats:', {
-    totalPosts: window.dashboardData.totalPosts,
-    participants: window.dashboardData.participantCount,
-    currentDay: window.dashboardData.currentDay,
-    completionRate: window.dashboardData.overallCompletionRate + '%',
-    totalWords: window.dashboardData.totalWords.toLocaleString() + '자'
-  });
+  console.log('✅ Dashboard data loaded!');
 }`;
 
     fs.writeFileSync('data.js', jsContent);
     
-    console.log('✅ Dashboard data updated successfully!');
-    console.log('📊 Final Stats:', {
+    console.log('✅ 대시보드 데이터 업데이트 완료!');
+    console.log('📊 최종 통계:', {
       totalPosts: validPosts.length,
       participants: participants.length,
-      currentDay: daysClamped,
+      currentDay: currentDay,
       completionRate: overallCompletionRate + '%',
       totalWords: totalWords.toLocaleString() + '자',
       maxStreak: maxStreak + '일'
     });
 
   } catch (error) {
-    console.error('❌ Error updating dashboard data:', error);
-    console.error('Stack trace:', error.stack);
+    console.error('❌ 전체 프로세스 오류:', error.message);
+    console.error('스택 트레이스:', error.stack);
+    
+    // 오류 발생시 기본 데이터라도 생성
+    const emergencyData = {
+      totalPosts: 0,
+      currentDay: 1,
+      participantCount: 0,
+      totalWords: 0,
+      overallCompletionRate: 0,
+      maxStreak: 0,
+      genreDistribution: {},
+      participantStats: [],
+      recentPosts: [],
+      lastUpdated: new Date().toISOString(),
+      projectInfo: {
+        startDate: '2025-09-23',
+        endDate: '2025-12-31',
+        totalDays: 100,
+      }
+    };
+    
+    const emergencyContent = `// 오류 발생으로 인한 응급 데이터
+window.dashboardData = ${JSON.stringify(emergencyData, null, 2)};`;
+    
+    fs.writeFileSync('data.js', emergencyContent);
+    console.log('🚑 응급 데이터 파일 생성 완료');
+    
     process.exit(1);
   }
 }
 
-// 실행
 updateDashboardData();
