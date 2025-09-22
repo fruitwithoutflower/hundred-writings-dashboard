@@ -24,7 +24,7 @@ jobs:
     - name: Install dependencies
       run: |
         npm init -y
-        npm install @notionhq/client
+        npm install @notionhq/client@2.2.15
         
     - name: Update data
       run: node update-data.js
