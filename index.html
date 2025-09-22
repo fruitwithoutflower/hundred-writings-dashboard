@@ -202,57 +202,9 @@
         </div>
     </div>
     
-    <script>
-        function updateProgress() {
-            const startDate = new Date('2025-09-23');
-            const today = new Date();
-            const daysPassed = Math.floor((today - startDate) / (1000 * 60 * 60 * 24)) + 1;
-            const currentDay = Math.min(Math.max(daysPassed, 1), 100);
-            
-            // 진행률 업데이트
-            document.getElementById('current-day').textContent = currentDay;
-            
-            // 원형 프로그레스 바 업데이트
-            const circle = document.getElementById('progress-circle');
-            const circumference = 2 * Math.PI * 50;
-            const progress = currentDay / 100;
-            const offset = circumference - (progress * circumference);
-            circle.style.strokeDashoffset = offset;
-            
-            // 완주율 계산 (실제로는 노션 데이터를 가져와야 함)
-            const writtenPosts = 3; // 실제 데이터로 교체 필요
-            const completionRate = Math.round((writtenPosts / currentDay) * 100);
-            document.getElementById('completion-rate').textContent = completionRate + '%';
-        }
-        
-        function updateLastUpdateTime() {
-            const now = new Date();
-            const timeString = now.toLocaleString('ko-KR', {
-                month: 'short',
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit'
-            });
-            document.getElementById('last-update').textContent = timeString;
-        }
-        
-        // 페이지 로드 시 실행
-        document.addEventListener('DOMContentLoaded', function() {
-            updateProgress();
-            updateLastUpdateTime();
-            
-            // 30초마다 업데이트
-            setInterval(() => {
-                updateProgress();
-                updateLastUpdateTime();
-            }, 30000);
-        });
-        
-        // 클릭 시 노션 아카이브로 이동
-        document.querySelector('.widget').addEventListener('click', function() {
-            window.open('https://www.notion.so/3959b66212ed40f6af2052c4be14fda0', '_blank');
-        });
-<script src="data.js"></script>
+    <!-- 외부 데이터 파일 로드 -->
+    <script src="data.js"></script>
+    
     <script>
         // 실시간 데이터로 업데이트
         function updateWithNotionData() {
