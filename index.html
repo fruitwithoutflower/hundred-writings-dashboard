@@ -202,30 +202,57 @@
         /* 모바일 최적화 */
         @media (max-width: 480px) {
             body {
-                padding: 20px 16px;
+                padding: 16px 12px;
             }
             
             .widget {
-                padding: 32px 24px;
+                padding: 24px 16px;
                 max-width: 100%;
+                margin: 0 auto;
             }
             
             .title {
-                font-size: 1.125rem;
+                font-size: 1.25rem;
                 margin-bottom: 24px;
             }
             
+            .progress-container {
+                margin: 20px 0;
+                padding: 10px; /* 원형 그래프 주변 여백 추가 */
+            }
+            
             .progress-ring {
-                width: 120px;
+                width: 140px; /* 원래 크기 유지 */
+                height: 140px;
+                margin: 0 auto 20px;
+                padding: 10px; /* 내부 패딩으로 잘림 방지 */
+            }
+            
+            .progress-ring svg {
+                width: 120px; /* SVG만 약간 축소 */
                 height: 120px;
+                display: block;
+                margin: 0 auto;
+            }
+            
+            .progress-ring__circle,
+            .progress-ring__progress {
+                cx: 60; /* SVG 크기에 맞춰 중심점 조정 */
+                cy: 60;
+                r: 50; /* 반지름도 조정 */
             }
             
             .progress-number {
-                font-size: 2rem;
+                font-size: 2rem; /* 텍스트 크기 원래대로 */
+            }
+            
+            .progress-label {
+                font-size: 0.875rem;
             }
             
             .stats {
                 gap: 12px;
+                margin-top: 24px;
             }
             
             .stat {
