@@ -1,71 +1,42 @@
 // 자동 생성된 데이터 파일
-// 마지막 업데이트: 2025. 9. 23. 오전 3:07:32
+// 마지막 업데이트: 2025. 9. 23. 오전 6:51:51
 window.dashboardData = {
-  "totalPosts": 4,
+  "totalPosts": 1,
   "currentDay": 1,
-  "participantCount": 2,
-  "totalWords": 33,
-  "overallCompletionRate": 2,
+  "participantCount": 1,
+  "totalWords": 2090,
+  "overallCompletionRate": 1,
   "maxStreak": 1,
   "genreDistribution": {
-    "일기": 3,
     "에세이": 1
   },
   "participantStats": [
     {
-      "author": "익명A",
-      "postCount": 3,
-      "wordCount": 5,
-      "completionRate": 3
-    },
-    {
-      "author": "익명B",
+      "author": "산호",
       "postCount": 1,
-      "wordCount": 28,
+      "wordCount": 2090,
       "completionRate": 1
     }
   ],
   "recentPosts": [
     {
-      "id": "2765b962-8bb9-8034-a4ae-f1e8adf09b5f",
-      "title": "샘플 4",
-      "author": "익명A",
-      "date": "2025-09-25",
-      "genre": "일기",
-      "tags": [],
-      "memo": "",
-      "wordCount": 0,
-      "day": 3
-    },
-    {
-      "id": "2765b962-8bb9-8005-b455-fe9a45cad647",
-      "title": "샘플2",
-      "author": "익명A",
-      "date": "2025-09-24",
-      "genre": "일기",
-      "tags": [],
-      "memo": "",
-      "wordCount": 0,
-      "day": 2
-    },
-    {
-      "id": "2765b962-8bb9-8039-b01c-f4e6f3ddc499",
-      "title": "샘플",
-      "author": "익명A",
+      "id": "2765b962-8bb9-813b-ac18-e437a168fc66",
+      "title": "산호 #1 어디서부터 써야 할까.",
+      "author": "산호",
       "date": "2025-09-23",
-      "genre": "일기",
+      "genre": "에세이",
       "tags": [],
       "memo": "",
-      "wordCount": 5,
+      "wordCount": 2090,
       "day": 1
     }
   ],
-  "lastUpdated": "2025-09-23T03:07:32.482Z",
+  "lastUpdated": "2025-09-23T06:51:51.359Z",
   "projectInfo": {
     "startDate": "2025-09-23",
     "endDate": "2025-12-31",
     "totalDays": 100,
-    "totalTargetPosts": 200
+    "totalTargetPosts": 100
   }
 };
 
