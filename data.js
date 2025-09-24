@@ -1,28 +1,40 @@
 // 자동 생성된 데이터 파일
-// 마지막 업데이트: 2025. 9. 24. 오후 1:20:46
+// 마지막 업데이트: 2025. 9. 24. 오후 6:44:37
 window.dashboardData = {
-  "totalPosts": 8,
+  "totalPosts": 12,
   "currentDay": 2,
   "participantCount": 8,
-  "totalWords": 9279,
-  "overallCompletionRate": 1,
-  "maxStreak": 1,
+  "totalWords": 12869,
+  "overallCompletionRate": 2,
+  "maxStreak": 2,
   "genreDistribution": {
-    "기타": 7,
+    "기타": 11,
     "에세이": 1
   },
   "participantStats": [
     {
+      "author": "무화과",
+      "postCount": 2,
+      "wordCount": 3309,
+      "completionRate": 2
+    },
+    {
+      "author": "강아지",
+      "postCount": 2,
+      "wordCount": 829,
+      "completionRate": 2
+    },
+    {
       "author": "유희",
-      "postCount": 1,
-      "wordCount": 1158,
-      "completionRate": 1
+      "postCount": 2,
+      "wordCount": 2762,
+      "completionRate": 2
     },
     {
       "author": "빛",
-      "postCount": 1,
-      "wordCount": 884,
-      "completionRate": 1
+      "postCount": 2,
+      "wordCount": 1429,
+      "completionRate": 2
     },
     {
       "author": "태린",
@@ -37,21 +49,9 @@ window.dashboardData = {
       "completionRate": 1
     },
     {
-      "author": "강아지",
-      "postCount": 1,
-      "wordCount": 626,
-      "completionRate": 1
-    },
-    {
       "author": "후무",
       "postCount": 1,
       "wordCount": 900,
-      "completionRate": 1
-    },
-    {
-      "author": "무화과",
-      "postCount": 1,
-      "wordCount": 2071,
       "completionRate": 1
     },
     {
@@ -63,40 +63,40 @@ window.dashboardData = {
   ],
   "recentPosts": [
     {
-      "id": "2775b962-8bb9-80c9-aba3-f48dfea1b3e9",
-      "title": "유희 #001 가을과 불안",
+      "id": "2785b962-8bb9-80b4-8e39-e85f4fa87259",
+      "title": "무화과 #002 2진법",
+      "author": "무화과",
+      "date": "2025-09-24",
+      "genre": "기타",
+      "tags": [],
+      "memo": "",
+      "wordCount": 1238,
+      "day": 2
+    },
+    {
+      "id": "2785b962-8bb9-80ef-9c5e-f02d96395286",
+      "title": "강아지 #002",
+      "author": "강아지",
+      "date": "2025-09-24",
+      "genre": "기타",
+      "tags": [],
+      "memo": "",
+      "wordCount": 203,
+      "day": 2
+    },
+    {
+      "id": "2785b962-8bb9-8083-af0d-fd14f22988b8",
+      "title": "유희 #002 피바람",
       "author": "유희",
-      "date": "2025-09-23",
+      "date": "2025-09-24",
       "genre": "기타",
       "tags": [],
       "memo": "",
-      "wordCount": 1158,
-      "day": 1
-    },
-    {
-      "id": "2775b962-8bb9-80c2-a31a-f02b47852c19",
-      "title": "빛 #001 일",
-      "author": "빛",
-      "date": "2025-09-23",
-      "genre": "기타",
-      "tags": [],
-      "memo": "",
-      "wordCount": 884,
-      "day": 1
-    },
-    {
-      "id": "2775b962-8bb9-805d-8def-f92954c06a3f",
-      "title": "태린 #001 친구가 죽었다.",
-      "author": "태린",
-      "date": "2025-09-23",
-      "genre": "기타",
-      "tags": [],
-      "memo": "",
-      "wordCount": 1247,
-      "day": 1
+      "wordCount": 1604,
+      "day": 2
     }
   ],
-  "lastUpdated": "2025-09-24T13:20:46.930Z",
+  "lastUpdated": "2025-09-24T18:44:37.850Z",
   "projectInfo": {
     "startDate": "2025-09-23",
     "endDate": "2025-12-31",
