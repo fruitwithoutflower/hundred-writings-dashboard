@@ -1,35 +1,59 @@
 // 자동 생성된 데이터 파일
-// 마지막 업데이트: 2025. 9. 28. 오전 6:45:53
+// 마지막 업데이트: 2025. 9. 28. 오후 12:04:59
 window.dashboardData = {
-  "totalPosts": 23,
+  "totalPosts": 37,
   "currentDay": 6,
   "participantCount": 9,
-  "totalWords": 26495,
-  "overallCompletionRate": 3,
-  "maxStreak": 0,
+  "totalWords": 43714,
+  "overallCompletionRate": 4,
+  "maxStreak": 6,
   "genreDistribution": {
-    "기타": 21,
+    "기타": 35,
     "일기": 1,
     "에세이": 1
   },
   "participantStats": [
     {
-      "author": "빛",
+      "author": "유희",
+      "postCount": 6,
+      "wordCount": 5492,
+      "completionRate": 6
+    },
+    {
+      "author": "무화과",
+      "postCount": 6,
+      "wordCount": 11772,
+      "completionRate": 6
+    },
+    {
+      "author": "후무",
+      "postCount": 6,
+      "wordCount": 9458,
+      "completionRate": 6
+    },
+    {
+      "author": "태린",
+      "postCount": 5,
+      "wordCount": 5310,
+      "completionRate": 5
+    },
+    {
+      "author": "강아지",
       "postCount": 3,
-      "wordCount": 1622,
+      "wordCount": 1657,
       "completionRate": 3
     },
     {
       "author": "두루",
-      "postCount": 3,
-      "wordCount": 1215,
-      "completionRate": 3
+      "postCount": 4,
+      "wordCount": 1752,
+      "completionRate": 4
     },
     {
-      "author": "태린",
-      "postCount": 3,
-      "wordCount": 3558,
-      "completionRate": 3
+      "author": "빛",
+      "postCount": 4,
+      "wordCount": 2153,
+      "completionRate": 4
     },
     {
       "author": "카야",
@@ -38,72 +62,48 @@ window.dashboardData = {
       "completionRate": 1
     },
     {
-      "author": "무화과",
-      "postCount": 3,
-      "wordCount": 5312,
-      "completionRate": 3
-    },
-    {
-      "author": "후무",
-      "postCount": 3,
-      "wordCount": 4151,
-      "completionRate": 3
-    },
-    {
-      "author": "유희",
-      "postCount": 3,
-      "wordCount": 3688,
-      "completionRate": 3
-    },
-    {
       "author": "산호",
       "postCount": 2,
       "wordCount": 5773,
-      "completionRate": 2
-    },
-    {
-      "author": "강아지",
-      "postCount": 2,
-      "wordCount": 829,
       "completionRate": 2
     }
   ],
   "recentPosts": [
     {
-      "id": "27a5b962-8bb9-8033-af9f-e0f9ec3fc6d6",
-      "title": "빛 #003",
-      "author": "빛",
-      "date": "2025-09-25",
+      "id": "27c5b962-8bb9-80a1-be7e-c1844943d445",
+      "title": "유희 #006 충만한 행복",
+      "author": "유희",
+      "date": "2025-09-28",
       "genre": "기타",
       "tags": [],
       "memo": "",
-      "wordCount": 193,
-      "day": 3
+      "wordCount": 366,
+      "day": 6
     },
     {
-      "id": "27a5b962-8bb9-802a-a51e-f25fee4c2767",
-      "title": "두루 #003",
-      "author": "두루",
-      "date": "2025-09-25",
+      "id": "27c5b962-8bb9-8094-b2b2-c46910271b38",
+      "title": "무화과 #006 인스타그램 스토리",
+      "author": "무화과",
+      "date": "2025-09-28",
       "genre": "기타",
       "tags": [],
       "memo": "",
-      "wordCount": 441,
-      "day": 3
+      "wordCount": 1854,
+      "day": 6
     },
     {
-      "id": "27a5b962-8bb9-80d7-88ce-d822fb74683f",
-      "title": "태린 #003",
-      "author": "태린",
-      "date": "2025-09-25",
+      "id": "27c5b962-8bb9-8064-b521-c65802bbde4c",
+      "title": "후무 #006 생활비에 대해서",
+      "author": "후무",
+      "date": "2025-09-28",
       "genre": "기타",
       "tags": [],
       "memo": "",
-      "wordCount": 1416,
-      "day": 3
+      "wordCount": 3327,
+      "day": 6
     }
   ],
-  "lastUpdated": "2025-09-28T06:45:53.950Z",
+  "lastUpdated": "2025-09-28T12:04:59.699Z",
   "projectInfo": {
     "startDate": "2025-09-23",
     "endDate": "2025-12-31",
