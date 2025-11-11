@@ -1,112 +1,106 @@
 // 자동 생성된 데이터 파일
-// 마지막 업데이트: 2025. 11. 11. 오후 12:32:00
+// 마지막 업데이트: 2025. 11. 11. 오후 6:22:51
 window.dashboardData = {
-  "totalPosts": 100,
+  "totalPosts": 98,
   "currentDay": 50,
-  "participantCount": 9,
-  "totalWords": 96045,
-  "overallCompletionRate": 11,
-  "maxStreak": 0,
+  "participantCount": 8,
+  "totalWords": 100354,
+  "overallCompletionRate": 12,
+  "maxStreak": 1,
   "genreDistribution": {
-    "기타": 100
+    "기타": 98
   },
   "participantStats": [
     {
-      "author": "후무",
-      "postCount": 15,
-      "wordCount": 19490,
-      "completionRate": 15
-    },
-    {
-      "author": "유희",
-      "postCount": 19,
-      "wordCount": 13676,
-      "completionRate": 19
+      "author": "무화과",
+      "postCount": 20,
+      "wordCount": 31721,
+      "completionRate": 20
     },
     {
       "author": "태린",
-      "postCount": 19,
-      "wordCount": 14915,
-      "completionRate": 19
+      "postCount": 22,
+      "wordCount": 12945,
+      "completionRate": 22
     },
     {
-      "author": "무화과",
-      "postCount": 17,
-      "wordCount": 25963,
-      "completionRate": 17
+      "author": "유희",
+      "postCount": 26,
+      "wordCount": 23430,
+      "completionRate": 26
+    },
+    {
+      "author": "후무",
+      "postCount": 14,
+      "wordCount": 20574,
+      "completionRate": 14
+    },
+    {
+      "author": "두루",
+      "postCount": 3,
+      "wordCount": 728,
+      "completionRate": 3
     },
     {
       "author": "산호",
       "postCount": 4,
-      "wordCount": 2861,
+      "wordCount": 4660,
       "completionRate": 4
     },
     {
       "author": "빛",
-      "postCount": 12,
-      "wordCount": 10794,
-      "completionRate": 12
+      "postCount": 8,
+      "wordCount": 5352,
+      "completionRate": 8
     },
     {
       "author": "강아지",
-      "postCount": 4,
-      "wordCount": 3953,
-      "completionRate": 4
-    },
-    {
-      "author": "두루",
-      "postCount": 5,
-      "wordCount": 3121,
-      "completionRate": 5
-    },
-    {
-      "author": "카야",
-      "postCount": 5,
-      "wordCount": 1272,
-      "completionRate": 5
+      "postCount": 1,
+      "wordCount": 944,
+      "completionRate": 1
     }
   ],
   "recentPosts": [
     {
-      "id": "28d5b962-8bb9-802b-8a67-e0f6560dacc3",
-      "title": "후무 #019 무기력",
-      "author": "후무",
-      "date": "2025-10-15",
+      "id": "2a85b962-8bb9-8063-a805-cfabd96b312f",
+      "title": "무화과 #036 노래방",
+      "author": "무화과",
+      "date": "2025-11-10",
       "genre": "기타",
       "tags": [],
       "memo": "",
-      "wordCount": 757,
-      "day": 23
+      "wordCount": 936,
+      "day": 49
     },
     {
-      "id": "28d5b962-8bb9-80c4-82c9-cbfc522e68ac",
-      "title": "유희 #022 미스테리",
-      "author": "유희",
-      "date": "2025-10-14",
-      "genre": "기타",
-      "tags": [],
-      "memo": "",
-      "wordCount": 463,
-      "day": 22
-    },
-    {
-      "id": "28d5b962-8bb9-80fb-a082-e845e2e77e93",
-      "title": "태린 #022",
+      "id": "2a85b962-8bb9-808a-860a-cfa0bbc916db",
+      "title": "태린 #037",
       "author": "태린",
-      "date": "2025-10-14",
+      "date": "2025-11-08",
       "genre": "기타",
       "tags": [],
       "memo": "",
-      "wordCount": 32,
-      "day": 22
+      "wordCount": 461,
+      "day": 47
+    },
+    {
+      "id": "2a85b962-8bb9-80ea-b882-ef45c6dc3f09",
+      "title": "태린 #036",
+      "author": "태린",
+      "date": "2025-11-07",
+      "genre": "기타",
+      "tags": [],
+      "memo": "",
+      "wordCount": 598,
+      "day": 46
     }
   ],
-  "lastUpdated": "2025-11-11T12:32:00.462Z",
+  "lastUpdated": "2025-11-11T18:22:51.009Z",
   "projectInfo": {
     "startDate": "2025-09-23",
     "endDate": "2025-12-31",
     "totalDays": 100,
-    "totalTargetPosts": 900
+    "totalTargetPosts": 800
   }
 };
 
