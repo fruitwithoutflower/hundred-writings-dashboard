@@ -1,5 +1,5 @@
 // 자동 생성된 데이터 파일
-// 마지막 업데이트: 2025. 11. 25. 오후 12:33:13
+// 마지막 업데이트: 2025. 11. 25. 오후 6:24:59
 window.dashboardData = {
   "totalPosts": 98,
   "currentDay": 64,
@@ -95,7 +95,7 @@ window.dashboardData = {
       "day": 46
     }
   ],
-  "lastUpdated": "2025-11-25T12:33:13.334Z",
+  "lastUpdated": "2025-11-25T18:24:59.466Z",
   "projectInfo": {
     "startDate": "2025-09-23",
     "endDate": "2025-12-31",
