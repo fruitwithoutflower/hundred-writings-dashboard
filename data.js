@@ -1,112 +1,88 @@
 // 자동 생성된 데이터 파일
-// 마지막 업데이트: 2026. 1. 8. 오후 12:36:33
+// 마지막 업데이트: 2026. 1. 8. 오후 6:22:56
 window.dashboardData = {
-  "totalPosts": 98,
+  "totalPosts": 100,
   "currentDay": 100,
-  "participantCount": 9,
-  "totalWords": 96685,
-  "overallCompletionRate": 11,
+  "participantCount": 5,
+  "totalWords": 59122,
+  "overallCompletionRate": 20,
   "maxStreak": 0,
   "genreDistribution": {
-    "기타": 98
+    "기타": 100
   },
   "participantStats": [
     {
       "author": "유희",
-      "postCount": 24,
-      "wordCount": 21417,
-      "completionRate": 24
-    },
-    {
-      "author": "태린",
-      "postCount": 23,
-      "wordCount": 11872,
-      "completionRate": 23
+      "postCount": 50,
+      "wordCount": 22831,
+      "completionRate": 50
     },
     {
       "author": "무화과",
+      "postCount": 21,
+      "wordCount": 25938,
+      "completionRate": 21
+    },
+    {
+      "author": "태린",
       "postCount": 26,
-      "wordCount": 37594,
+      "wordCount": 7133,
       "completionRate": 26
     },
     {
-      "author": "빛",
-      "postCount": 6,
-      "wordCount": 3034,
-      "completionRate": 6
-    },
-    {
-      "author": "옥상",
-      "postCount": 1,
-      "wordCount": 720,
-      "completionRate": 1
-    },
-    {
-      "author": "애월",
+      "author": "산호",
       "postCount": 2,
-      "wordCount": 1123,
+      "wordCount": 1520,
       "completionRate": 2
     },
     {
       "author": "후무",
-      "postCount": 11,
-      "wordCount": 16768,
-      "completionRate": 11
-    },
-    {
-      "author": "두루",
-      "postCount": 2,
-      "wordCount": 388,
-      "completionRate": 2
-    },
-    {
-      "author": "산호",
-      "postCount": 3,
-      "wordCount": 3769,
-      "completionRate": 3
+      "postCount": 1,
+      "wordCount": 1700,
+      "completionRate": 1
     }
   ],
   "recentPosts": [
     {
-      "id": "2e25b962-8bb9-8041-81ac-ceff7ab3c2ad",
-      "title": "유희 #045 오늘 서울은 영하 -1도",
+      "id": "2e25b962-8bb9-80a4-bd24-de931dddd839",
+      "title": "유희 #100 나를 받아들이는 일",
       "author": "유희",
-      "date": "2025-11-17",
+      "date": "2025-12-31",
       "genre": "기타",
       "tags": [],
       "memo": "",
-      "wordCount": 632,
-      "day": 56
+      "wordCount": 436,
+      "day": 100
     },
     {
-      "id": "2e25b962-8bb9-8056-9ccb-c01a6e0a9eef",
-      "title": "태린 #044",
-      "author": "태린",
-      "date": "2025-11-17",
+      "id": "2e25b962-8bb9-80df-a062-f6b8d4528aed",
+      "title": "유희 #099 이토록 감흥없는",
+      "author": "유희",
+      "date": "2025-12-31",
       "genre": "기타",
       "tags": [],
       "memo": "",
-      "wordCount": 572,
-      "day": 56
+      "wordCount": 378,
+      "day": 100
     },
     {
-      "id": "2e25b962-8bb9-80e9-bc21-f76ee02e60c2",
-      "title": "태린 #043",
-      "author": "태린",
-      "date": "2025-11-17",
+      "id": "2e25b962-8bb9-8046-a006-d85b5ddc20d1",
+      "title": "유희 #098 좋은 핑계",
+      "author": "유희",
+      "date": "2025-12-31",
       "genre": "기타",
       "tags": [],
       "memo": "",
-      "wordCount": 180,
-      "day": 56
+      "wordCount": 169,
+      "day": 100
     }
   ],
-  "lastUpdated": "2026-01-08T12:36:33.433Z",
+  "lastUpdated": "2026-01-08T18:22:56.245Z",
   "projectInfo": {
     "startDate": "2025-09-23",
     "endDate": "2025-12-31",
     "totalDays": 100,
-    "totalTargetPosts": 900
+    "totalTargetPosts": 500
   }
 };
 
